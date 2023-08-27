@@ -1,31 +1,36 @@
 package com.spaceinvaders.game;
 
 import com.badlogic.gdx.ApplicationAdapter;
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.utils.ScreenUtils;
 
 public class SpaceInvaders extends ApplicationAdapter {
 	SpriteBatch batch;
-	Texture img;
+	Texture nave, bullet;
+	Player player;
+
 	
 	@Override
 	public void create () {
 		batch = new SpriteBatch();
-		img = new Texture("badlogic.jpg");
+		nave = new Texture("nave.png");
+		bullet = new Texture("bullet.png");
+		player = new Player(nave, bullet);
 	}
 
 	@Override
 	public void render () {
-		ScreenUtils.clear(1, 0, 0, 1);
+		ScreenUtils.clear(0, 0, 0, 1);
 		batch.begin();
-		batch.draw(img, 0, 0);
+		player.draw(batch);
 		batch.end();
 	}
 	
 	@Override
 	public void dispose () {
 		batch.dispose();
-		img.dispose();
+		nave.dispose();
 	}
 }
