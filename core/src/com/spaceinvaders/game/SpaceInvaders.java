@@ -14,7 +14,7 @@ public class SpaceInvaders extends ApplicationAdapter {
 	Alien[] aliens;
 	int aliensWidth = 11;
 	int aliensHeight = 5;
-	int aliensSpace = 20;
+	int aliensSpace = 50;
 
 	
 	@Override
@@ -28,8 +28,8 @@ public class SpaceInvaders extends ApplicationAdapter {
 		int aux = 0;
 		for(int i = 0; i < aliensHeight; i++){
 			for(int j = 0; j < aliensWidth; j++){
+				aliens[aux] = new Alien(new Vector2(j*aliensSpace, i*aliensSpace), alien);
 				aux++;
-				aliens[i] = new Alien(new Vector2(j*aliensSpace, i*aliensSpace), alien);
 			}
 		}
 	}
@@ -39,9 +39,9 @@ public class SpaceInvaders extends ApplicationAdapter {
 		ScreenUtils.clear(0, 0, 0, 1);
 		batch.begin();
 		player.draw(batch);
-		for(int i = 0; i < aliens.length; i++) {
-			aliens[i].draw(batch);
-		}
+        for (Alien value : aliens) {
+            value.draw(batch);
+        }
 		batch.end();
 	}
 	
