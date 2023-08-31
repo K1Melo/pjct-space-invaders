@@ -28,7 +28,14 @@ public class SpaceInvaders extends ApplicationAdapter {
 		int aux = 0;
 		for(int i = 0; i < aliensHeight; i++){
 			for(int j = 0; j < aliensWidth; j++){
-				aliens[aux] = new Alien(new Vector2(j*aliensSpace, i*aliensSpace), alien);
+				Vector2 position = new Vector2(j*aliensSpace, i*aliensSpace);
+				position.x += (float) Gdx.graphics.getWidth() /2;
+				position.y += Gdx.graphics.getHeight();
+
+				position.x -= ((float) aliensWidth /2)*aliensSpace;
+				position.y -= aliensHeight*aliensSpace;
+
+				aliens[aux] = new Alien(position, alien);
 				aux++;
 			}
 		}
@@ -39,8 +46,15 @@ public class SpaceInvaders extends ApplicationAdapter {
 		ScreenUtils.clear(0, 0, 0, 1);
 		batch.begin();
 		player.draw(batch);
-        for (Alien value : aliens) {
-            value.draw(batch);
+        for (int i = 0; i < aliens.length; i++) {
+			if (aliens[i].alive){
+				if (player.bulletSprite.getBoundingRectangle().overlaps(aliens[i].sprite.getBoundingRectangle())) {
+					aliens[i].alive = false;
+					player.bulletPositionY = 601;
+					break;
+				}
+            	aliens[i].draw(batch);
+			}
         }
 		batch.end();
 	}

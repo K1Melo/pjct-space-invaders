@@ -36,7 +36,7 @@ public class Player {
         if (Gdx.input.isKeyPressed(Input.Keys.SPACE)) {
             shooting = true;
         }
-        if (shooting && bulletPositionY < Gdx.graphics.getWidth()) {
+        if (shooting && bulletPositionY < Gdx.graphics.getHeight()) {
             bulletPositionY += 10;
         }else {
             bulletPositionX = (int) position.x;
@@ -49,9 +49,9 @@ public class Player {
     public void draw(SpriteBatch batch){
         this.moveMissile();
         this.updatePlayer();
-        sprite.setPosition(position.x, position.y);
-        sprite.draw(batch);
         bulletSprite.setPosition(bulletPositionX + sprite.getWidth()/2, bulletPositionY + sprite.getHeight()/2 - 10);
         bulletSprite.draw(batch);
+        sprite.setPosition(position.x, position.y);
+        sprite.draw(batch);
     }
 }
