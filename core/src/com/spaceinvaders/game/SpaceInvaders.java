@@ -15,6 +15,7 @@ public class SpaceInvaders extends ApplicationAdapter {
 	int aliensWidth = 11;
 	int aliensHeight = 5;
 	int aliensSpace = 50;
+	float xDelta = 1;
 
 	
 	@Override
@@ -54,6 +55,11 @@ public class SpaceInvaders extends ApplicationAdapter {
 					break;
 				}
             	aliens[i].draw(batch);
+
+				aliens[i].position.x += xDelta;
+				if (aliens[i].position.x == Gdx.graphics.getWidth() - 50 || aliens[i].position.x == 0) {
+					xDelta *= -1;
+				}
 			}
         }
 		batch.end();
