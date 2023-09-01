@@ -6,6 +6,7 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.utils.ScreenUtils;
+import sun.awt.windows.ThemeReader;
 
 import java.util.Random;
 import java.util.concurrent.TimeUnit;
@@ -51,30 +52,33 @@ public class SpaceInvaders extends ApplicationAdapter {
 		ScreenUtils.clear(0, 0, 0, 1);
 		batch.begin();
 		player.draw(batch);
-        for (int i = 0; i < aliens.length; i++) {
-			if (aliens[i].alive){
-				if (player.bulletSprite.getBoundingRectangle().overlaps(aliens[i].sprite.getBoundingRectangle())) {
-					aliens[i].alive = false;
-					isNotAlive++;
-					player.bulletPositionY = 601;
-					break;
-				}
-            	aliens[i].draw(batch);
-
-				aliens[i].position.x += xDelta;
-				if (aliens[i].position.x == Gdx.graphics.getWidth() - 50 || aliens[i].position.x == 0) {
-					xDelta *= -1;
-					for (int j = 0; j < aliens.length; j++) {
-						aliens[j].position.y -= 10;
-					}
-				}
-			} else {
-				if (isNotAlive == 55){
+        for (Alien item : aliens) {
+            if (item.alive) {
+                if (player.bulletSprite.getBoundingRectangle().overlaps(item.sprite.getBoundingRectangle())) {
+                    item.alive = false;
+                    isNotAlive++;
+                    player.bulletPositionY = 601;
+                    break;
+                }
+				if (item.sprite.getBoundingRectangle().overlaps(player.sprite.getBoundingRectangle())){
 					Gdx.app.exit();
 				}
-			}
-        }
+                item.draw(batch);
 
+                item.position.x += xDelta;
+                if (item.position.x == Gdx.graphics.getWidth() - 50 || item.position.x == 0) {
+                    xDelta *= -1;
+                    for (Alien value : aliens) {
+                        value.position.y -= 10;
+                    }
+                }
+
+            } else {
+                if (isNotAlive == 55) {
+                    Gdx.app.exit();
+                }
+            }
+        }
 		batch.end();
 	}
 	

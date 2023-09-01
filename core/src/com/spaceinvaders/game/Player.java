@@ -26,7 +26,6 @@ public class Player {
         if (Gdx.input.isKeyPressed(Input.Keys.D) && Gdx.graphics.getWidth() - 55 > position.x) {
             position.x += deltaVelocity;
         }
-
         if (Gdx.input.isKeyPressed(Input.Keys.A) && 5 < position.x) {
             position.x -= deltaVelocity;
         }
@@ -38,7 +37,7 @@ public class Player {
         }
         if (shooting && bulletPositionY < Gdx.graphics.getHeight()) {
             bulletPositionY += 10;
-        }else {
+        } else {
             bulletPositionX = (int) position.x;
             bulletPositionY = (int) sprite.getHeight()/2 - 20;
             shooting = false;
