@@ -59,9 +59,14 @@ public class SpaceInvaders extends ApplicationAdapter {
 				aliens[i].position.x += xDelta;
 				if (aliens[i].position.x == Gdx.graphics.getWidth() - 50 || aliens[i].position.x == 0) {
 					xDelta *= -1;
+					for (int j = 0; j < aliens.length; j++) {
+						aliens[j].position.y -= 10;
+					}
 				}
 			}
         }
+		System.out.println(aliens.length);
+
 		batch.end();
 	}
 	
