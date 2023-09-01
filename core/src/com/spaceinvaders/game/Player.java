@@ -9,11 +9,11 @@ import com.badlogic.gdx.math.Vector2;
 
 public class Player {
     public Vector2 position;
-    public int bulletPositionX, bulletPositionY;
     public Sprite sprite;
+    public int bulletPositionX, bulletPositionY;
     public Sprite bulletSprite;
-    public int deltaVelocity = 10;
     private boolean shooting = false;
+    public int deltaVelocity = 10;
     public Player(Texture img, Texture bullet){
         sprite = new Sprite(img);
         position = new Vector2((float) Gdx.graphics.getWidth()/2 - 25, 0);
@@ -43,7 +43,6 @@ public class Player {
             bulletPositionY = (int) sprite.getHeight()/2 - 20;
             shooting = false;
         }
-
     }
 
     public void draw(SpriteBatch batch){

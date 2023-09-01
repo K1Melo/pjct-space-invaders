@@ -7,6 +7,9 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.utils.ScreenUtils;
 
+import java.util.Random;
+import java.util.concurrent.TimeUnit;
+
 public class SpaceInvaders extends ApplicationAdapter {
 	SpriteBatch batch;
 	Texture nave, bullet, alien;
@@ -15,6 +18,7 @@ public class SpaceInvaders extends ApplicationAdapter {
 	int aliensWidth = 11;
 	int aliensHeight = 5;
 	int aliensSpace = 50;
+	int isNotAlive;
 	float xDelta = 1;
 
 	
@@ -51,6 +55,7 @@ public class SpaceInvaders extends ApplicationAdapter {
 			if (aliens[i].alive){
 				if (player.bulletSprite.getBoundingRectangle().overlaps(aliens[i].sprite.getBoundingRectangle())) {
 					aliens[i].alive = false;
+					isNotAlive++;
 					player.bulletPositionY = 601;
 					break;
 				}
@@ -63,9 +68,12 @@ public class SpaceInvaders extends ApplicationAdapter {
 						aliens[j].position.y -= 10;
 					}
 				}
+			} else {
+				if (isNotAlive == 55){
+					Gdx.app.exit();
+				}
 			}
         }
-		System.out.println(aliens.length);
 
 		batch.end();
 	}
