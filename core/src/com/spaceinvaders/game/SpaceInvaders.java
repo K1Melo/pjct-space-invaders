@@ -69,13 +69,13 @@ public class SpaceInvaders extends ApplicationAdapter {
                 if (item.position.x == Gdx.graphics.getWidth() - 50 || item.position.x == 0) {
                     xDelta *= -1;
                     for (Alien value : aliens) {
-                        value.position.y -= 10;
+                        value.position.y -= 20;
                     }
                 }
 
             } else {
                 if (isNotAlive == 55) {
-                    Gdx.app.exit();
+					Gdx.app.exit();
                 }
             }
         }
